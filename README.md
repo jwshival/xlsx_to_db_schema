@@ -11,13 +11,13 @@
 #### 3.1. Execute:
 
 `
-./console -apdapter={:adapter} -source={:sourcePATH} -dest={:destPATH}
+./console -table_name=corporation_salary_systems -apdapter={:adapter} -source={:sourcePATH} -dest={:destPATH}
 `
 
 Example:
 
 `
-./console exec -apdapter=mysql -source=workspace/example.xlsx -dest=workspace/db_schemas
+./console -adapter=mysql -table_name=corporation_salary_systems -source=/Users/admin/Desktop/workspace/ponos/payroll_apis_design/corporation_salary_systems.csv -dest=/Users/admin/Desktop/test.sql
 `
 
 - adapter: mysql or postgresql
