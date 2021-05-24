@@ -1,3 +1,3 @@
-module github/xlsx_to_db_schema
+module xlsx_to_db_schema
 
 go 1.16
