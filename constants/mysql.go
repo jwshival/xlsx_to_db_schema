@@ -2,8 +2,8 @@ package constants
 
 const (
 	EngineDefault        string = "InnoDB"
-	AutoIncrementDefault int    = 34119
-	CharsetDefault       string = ""
-	CollateDefault       string = ""
+	AutoIncrementDefault string = "34119"
+	CharsetDefault       string = "utf8mb4"
+	CollateDefault       string = "utf8mb4_general_ci"
 	RowFormatDefault     string = "DYNAMIC"
 )

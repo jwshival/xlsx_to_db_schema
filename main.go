@@ -9,17 +9,17 @@ import (
 )
 
 func main() {
-	var adapter, sourcePath, destPath string
-	boot.InitArguments(&adapter, &sourcePath, &destPath)
+	var adapter, tableName, sourcePath, destPath string
+	boot.InitArguments(&adapter, &tableName, &sourcePath, &destPath)
 
 	validator := validators.NewValidator(adapter, sourcePath, destPath)
-	file := validator.Valid()
+	csvRows := validator.Valid()
 	if validator.Err != nil {
 		fmt.Println(validator.Err.Error())
 		return
 	}
 
-	gen := gen.NewGenerator(file, destPath)
+	gen := gen.NewGenerator(tableName, csvRows, destPath)
 	gen.Execute()
 	if gen.Err != nil {
 		fmt.Println(gen.Err.Error())
