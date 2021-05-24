@@ -1,5 +1,10 @@
 package validators
 
+import (
+	"errors"
+	"xlsx_to_db_schema/constants"
+)
+
 /*
 Check console from user.
 
@@ -8,5 +13,8 @@ Check console from user.
 */
 
 func checkSupportedAdapter(adapter string) error {
+	if adapter != constants.MySQLAdapter && adapter != constants.PSQLAdapter {
+		return errors.New(constants.NotSupportAdapter)
+	}
 	return nil
 }

@@ -1,6 +1,8 @@
 package validators
 
-import "os"
+import (
+	"xlsx_to_db_schema/utils"
+)
 
 type Validator struct {
 	adapter    string
@@ -13,31 +15,48 @@ func NewValidator(adapter string, sourcePath string, destPath string) *Validator
 	return &Validator{adapter: adapter, sourcePath: sourcePath, destPath: destPath}
 }
 
-func (validator Validator) Valid() *os.File {
+func getValidatorErr(err error, validatorErr *error)  {
+	*validatorErr = err
+}
+
+func (validator *Validator) Valid() *[][]string {
 	var err error
-	err = checkFileExtension(validator.sourcePath)
+	err = checkSupportedAdapter(validator.adapter)
 	if err != nil {
+		getValidatorErr(err, &validator.Err)
 		return nil
 	}
 
 	err = checkSupportedAdapter(validator.adapter)
 	if err != nil {
-		validator.Err = err
+		getValidatorErr(err, &validator.Err)
 		return nil
 	}
 
-	err = checkFilePath(validator.sourcePath, validator.destPath)
+	err = checkFilePath(validator.sourcePath)
 	if err != nil {
-		validator.Err = err
+		getValidatorErr(err, &validator.Err)
 		return nil
 	}
 
-	err = checkFileHeader(validator.sourcePath)
+	err = checkFileExtension(validator.sourcePath)
 	if err != nil {
-		validator.Err = err
+		getValidatorErr(err, &validator.Err)
 		return nil
 	}
 
-	// Open file
-	return nil
+	records, err := utils.ReadData(validator.sourcePath)
+	if err != nil {
+		getValidatorErr(err, &validator.Err)
+		return nil
+	}
+
+	err = checkFileHeader(records[0])
+	if err != nil {
+		getValidatorErr(err, &validator.Err)
+		return nil
+	}
+
+	return &records
+
 }
