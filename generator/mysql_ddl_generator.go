@@ -14,7 +14,7 @@ func createTable(tableName string, createColumns []string) string {
 	tmpCreateTable := fmt.Sprintf("CREATE TABLE %s (\n", tableName)
 	tmpCreateColumns := strings.Join(createColumns, ",\n")
 	tmpDestCreateTable := fmt.Sprintf("\n)")
-	var tmpOptions = fmt.Sprintf(" ENGINE=%s AUTO_INCREMENT=%s DEFAULT"+
+	var tmpOptions = fmt.Sprintf(" ENGINE=%s AUTO_INCREMENT=%s DEFAULT "+
 		"CHARSET=%s COLLATE=%s ROW_FORMAT=%s;", c.EngineDefault, c.AutoIncrementDefault,
 		c.CharsetDefault, c.CollateDefault, c.RowFormatDefault)
 	table := []string{tmpCreateTable, tmpCreateColumns, tmpDestCreateTable, tmpOptions}

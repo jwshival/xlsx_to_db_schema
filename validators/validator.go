@@ -58,5 +58,4 @@ func (validator *Validator) Valid() *[][]string {
 	}
 
 	return &records
-
 }
